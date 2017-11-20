@@ -20,11 +20,15 @@ fs.rename('')
 
 app.get("/draw/:number", (req, res) => {
     const cards = [];
-    for(var i=0; i<Number(req.params.number); i++){
-        let card = {value: values[Math.floor(Math.random()*13)], suit: suits[Math.floor(Math.random()*4)]}
-        cards.push(card)
+    if(req.params.number<=10){
+        for(var i=0; i<Number(req.params.number); i++){
+            let card = {value: values[Math.floor(Math.random()*13)], suit: suits[Math.floor(Math.random()*4)]}
+            cards.push(card)
+        }
+        res.send(cards)
+    }else{
+        res.send(`Number of cards must be 10 or less`)
     }
-    res.send(cards)
 })
 
 app.get("/blackJack/", (req, res) => {
